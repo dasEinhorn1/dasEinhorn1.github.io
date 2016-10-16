@@ -1,3 +1,72 @@
 nav{
-  background-color: #FDFFFC
+  background-color: #E6E6E8;
+}
+#navToggler{
+  margin-top: 10px;
+  font-size: 1.5em;
+}
+.pushRight{
+  float:right;
+}
+.clear{
+  clear:both;
+}
+.collapsing{
+  clear:both;
+}
+.vertNav{
+  text-align: center;
+}
+
+#collapseNav #navItems{
+  padding-top: 1.5em;
+}
+
+#home{
+  width: 95%;
+  top:10;
+  position: absolute;
+  left:2.5%;
+  overflow: hidden;
+}
+#home > *{
+  position: relative;
+}
+
+#home img{
+  display: block;
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.overlay{
+  position: absolute;
+  color: white;
+  top:10;
+  width:95%;
+  left:2.5%;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.overlay > *{
+  position: relative;
+}
+
+.closeContainer{
+  text-align: right;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.navbar-custom .navbar-nav > .nav-item > .nav-link,
+.navbar-custom .navbar-nav > .nav-item > .nav-link:focus {
+  color:rgba(0,0,0,.3);
+}
+.navbar-custom .navbar-nav > .nav-item > .nav-link:hover,
+.navbar-custom .navbar-nav > .nav-item > .nav-link.active {
+  color:rgba(0,0,0,.8);
+}
+
+.overlay.inactive{
+  display: none;
 }
