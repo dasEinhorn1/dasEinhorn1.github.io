@@ -8,6 +8,12 @@ var widthFix=function(e){
     $("#navItems").removeClass("vertNav");
     $("#firstNav").removeClass("clear");
   }
+  if(window.innerWidth>1034 && $("#home").css("background-size")!="cover"){
+    $("#home").css("background-size","cover")
+  }else if(window.innerWidth<1034 && $("#home").css("background-size")=="cover"){
+    console
+    $("#home").css("background-size","contain")
+  }
 }
 
 var overlayIsOpen=function(){
@@ -42,11 +48,5 @@ var closeOverlay=function(e){
 var changeCurrentNav= function(el){
   console.log(el);
   $(".nav-link").removeClass("active");
-  if(!($(el).hasClass("closer"))){
-    console.log("not closer");
-    $(el).addClass("active");
-  }else{
-    console.log("closer");
-    $("#firstNav > .nav-link").addClass("active");
-  }
+  $(".nav-item .nav-link[href='"+$(el).attr("href")+"']").addClass("active");
 }
