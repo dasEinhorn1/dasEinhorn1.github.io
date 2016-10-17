@@ -16,6 +16,11 @@ var widthFix=function(e){
   }
 }
 
+var heightFix=function(e){
+  $(".overlay").height(window.innerHeight - $("#navContainer").height());
+  $("#home").height(window.innerHeight - $("#navContainer").height());
+}
+
 var overlayIsOpen=function(){
   return !($(".overlay.active").length==0)
 }
