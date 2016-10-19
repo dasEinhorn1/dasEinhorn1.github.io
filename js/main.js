@@ -8,12 +8,6 @@ var widthFix=function(e){
     $("#navItems").removeClass("vertNav");
     $("#firstNav").removeClass("clear");
   }
-  if(window.innerWidth>1034 && $("#home").css("background-size")!="cover"){
-    $("#home").css("background-size","cover")
-  }else if(window.innerWidth<1034 && $("#home").css("background-size")=="cover"){
-    console
-    $("#home").css("background-size","contain")
-  }
 }
 
 var heightFix=function(e){

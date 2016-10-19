@@ -27,8 +27,8 @@ nav{
   top:10;
   position: absolute;
   left:0;
-  background-image: url(../media/placeholder.png);
-  background-size:contain;
+  background: url(../media/placeholder.png) no-repeat center fixed;
+  background-size:cover;
   overflow: hidden;
 }
 .centered{
