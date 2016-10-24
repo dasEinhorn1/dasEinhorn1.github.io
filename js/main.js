@@ -1,4 +1,5 @@
 var widthFix=function(e){
+  /*
   if(window.innerWidth<544){
     $("#navItems").removeClass("pushRight");
     $("#navItems").addClass("vertNav");
@@ -8,11 +9,11 @@ var widthFix=function(e){
     $("#navItems").removeClass("vertNav");
     $("#firstNav").removeClass("clear");
   }
+  */
 }
 
 var heightFix=function(e){
-  $(".overlay").height(window.innerHeight - $("#navContainer").height());
-  $("#home").height(window.innerHeight - $("#navContainer").height());
+  $("#mainContent").height(window.innerHeight - $("#navContainer").height());
 }
 
 var overlayIsOpen=function(){

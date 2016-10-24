@@ -5,6 +5,23 @@ nav{
   margin-top: 10px;
   font-size: 1.5em;
 }
+
+@media screen and (max-width:544px) {
+  #navItems{
+    float:none;
+    text-align: center;
+  }
+  #navItems > nav-item:first-of-type{
+    clear:both;
+  }
+  .overlay{
+    width:100% !important;
+  }
+  #home{
+    width:100% !important;
+  }
+}
+
 .pushRight{
   float:right;
 }
@@ -14,52 +31,69 @@ nav{
 .collapsing{
   clear:both;
 }
-.vertNav{
-  text-align: center;
-}
 
 #collapseNav #navItems{
   padding-top: 1.5em;
 }
 
 #home{
-  width: 100%;
+  width: 50%;
   top:10;
+  height:100%;
   position: absolute;
   left:0;
-  background: url(../media/placeholder.png) no-repeat center fixed;
+  background: url('../media/placeholder.jpg') no-repeat;
+  background-position: center top;
   background-size:cover;
   overflow: hidden;
 }
 .centered{
   position: absolute;
-  top: 20%;
-  transform: translateY(-50%);
+  top: 0;
   text-align: center;
 }
 .title{
-  display: inline-block;
   margin: auto;
+  font-size: 4em;
   padding:.5em;
-  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   color: #E6E6E8;
 }
 #home > *{
   position: relative;
 }
-
+#mainContent{
+  position: relative;
+}
 .overlay{
   position: absolute;
+  padding: 1em 1.5em;
   color: white;
-  top:10;
-  width:95%;
-  left:2.5%;
-  background-color: rgba(0, 0, 0, 0.75);
+  height: 75%;
+  top:50%;
+  transform: translateY(-50%);
+  width:45%;
+  right:2.5%;
+  overflow-y:scroll;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .overlay > *{
   position: relative;
 }
+.niceList{
+  width:100%;
+  padding: 1em;
+}
+.niceList>li{
+  width: inherit;
+  text-decoration: none;
+  list-style: none;
+  border-bottom: 2px solid white;
+
+}
+
 
 .closeContainer{
   text-align: right;
