@@ -1,43 +1,81 @@
 nav{
   background-color: #E6E6E8;
+  position: absolute;
 }
+
 #navToggler{
   margin-top: 10px;
   font-size: 1.5em;
 }
 
+/*
+  Extra small (mobile)
+*/
 @media screen and (max-width:544px) {
+  #navToggler{
+    display: inline;
+  }
   #navItems{
+    position: relative;
+    top:0;
     float:none;
+    clear:both;
     text-align: center;
   }
-  #navItems > nav-item:first-of-type{
+  #navItems >.nav-item{
+    width:100%;
     clear:both;
   }
-  .overlay{
-    width:100% !important;
+  #me{
+    width:100%;
   }
-  #home{
-    width:100% !important;
+  .carded{
+    width:100%;
+    margin-bottom: 1em;
+    margin-right: 0;
+  }
+  .overlay{
+    color: #E6E6E8;
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 }
-
+@media screen and (min-width:545px){
+  #navToggler{
+    display: none;
+  }
+  #navItems{
+    display: inline-block;
+    top:0;
+    transform: translateY(50%);
+    height:100%;
+    float:right;
+    text-align: center;
+  }
+  #navItems >.nav-item{
+    padding:0 .5em;
+  }
+  .overlay{
+    color:#E6E6E8;
+    width:50%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  #me{
+    width:50%;
+  }
+}
 .pushRight{
   float:right;
 }
 .clear{
   clear:both;
 }
-.collapsing{
-  clear:both;
+
+#navItems{
+
 }
 
-#collapseNav #navItems{
-  padding-top: 1.5em;
-}
-
-#home{
-  width: 50%;
+#me{
   top:10;
   height:100%;
   position: absolute;
@@ -60,7 +98,7 @@ nav{
   background-color: rgba(0, 0, 0, 0.6);
   color: #E6E6E8;
 }
-#home > *{
+#me > *{
   position: relative;
 }
 #mainContent{
@@ -69,13 +107,10 @@ nav{
 .overlay{
   position: absolute;
   padding: 1em 1.5em;
-  color: black;
   height: 100%;
   top:0;
-  width:50%;
   right:0;
   overflow-y:auto;
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .overlay > *{
@@ -104,7 +139,7 @@ nav{
 }
 .expandable{
   width: inherit;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #E6E6E8;
 }
 .expandable>h2{
   cursor: pointer;
@@ -122,18 +157,17 @@ nav{
 }
 
 .carded{
-  float:left;
   box-sizing: border-box;
-  margin-right:.5em;
-  margin-bottom: .5em;
+  margin-bottom: 2em;
   display: inline-block;
   background-color:rgba(0, 0, 0, 0.4);
-  width:48%;
+
   min-height: 400px;
 }
 .carded>div{
   padding: 0em 1em 1em 1em;
   float: left;
+  width:100%;
 }
 .carded>div:first-child{
   overflow: hidden;
@@ -160,6 +194,10 @@ nav{
   cursor: pointer;
 }
 
+#navItems>.nav-item{
+  margin: 0;
+}
+
 .navbar-custom .navbar-nav > .nav-item > .nav-link,
 .navbar-custom .navbar-nav > .nav-item > .nav-link:focus {
   color:rgba(0,0,0,.3);
@@ -176,3 +214,11 @@ nav{
 /*
   IMAGES FOR PROJECTS
 */
+#fourierart{
+  background: url('../media/fourier-art.png') center;
+  background-size: cover;
+}
+#shapeofhistory{
+  background: url('../media/shape-of-history.PNG') center;
+  background-size: cover;
+}

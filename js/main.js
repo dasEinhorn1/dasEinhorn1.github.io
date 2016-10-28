@@ -24,25 +24,28 @@ var openOverlay=function(e){
   changeCurrentNav(e.target);
   if(!overlayIsOpen()){
     var overlay=$(e.target).attr("href");
-    if(overlay!="#"){
-      $(overlay).removeClass("inactive").addClass("active");
+    if(overlay=="#"){
+      overlay="#home"
     }
+    $(overlay).removeClass("inactive").addClass("active");
   }else{
     console.log("closing an overlay")
     $(".overlay.active").addClass("inactive").removeClass("active");
     var overlay=$(e.target).attr("href");
-    if(overlay!="#"){
-      $(overlay).removeClass("inactive").addClass("active");
+    if(overlay=="#"){
+      overlay="#home";
     }
+    $(overlay).removeClass("inactive").addClass("active");
   }
 }
 
 var closeOverlay=function(e){
   changeCurrentNav(e.target)
   var overlay=$(e.target).attr("href");
-  if(overlay!="#"){
-    $(overlay).addClass("inactive").removeClass("active");
+  if(overlay=="#"){
+    overlay="#home";
   }
+  $(overlay).addClass("inactive").removeClass("active");
 }
 
 var changeCurrentNav= function(el){
