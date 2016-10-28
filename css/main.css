@@ -31,6 +31,9 @@ p{
   #me{
     width:100%;
   }
+  #github{
+    background-image: url("../media/icons/GitHub-Mark-Light-120px-plus.png") !important;
+  }
   .carded{
     width:100%;
     background-color: rgba(0, 0, 0, 0.4);
@@ -253,6 +256,7 @@ p{
   transform: translateY(-50%);
 }
 #contact>div{
+  margin-top: -5%;
   width: 100%;
   max-width: 100%;
   padding-bottom: 75%
@@ -265,8 +269,8 @@ p{
   padding-bottom: 25%
 }
 #twitter{
-  top:25%;
-  right:50%;
+  top:75%;
+  right:75%;
   transform: translate(50%,-50%);
   background: url("../media/icons/Twitter_Social_Icon_Circle_Color.png") center center;
   background-size: contain;
@@ -279,8 +283,8 @@ p{
   background-size: contain;
 }
 #github{
-  top:75%;
-  right:75%;
+  top:25%;
+  right:50%;
   transform: translate(50%,-50%);
   background: url("../media/icons/GitHub-Mark-120px-plus.png") center center;
   background-size: contain;
