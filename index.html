@@ -49,10 +49,12 @@
       <div id="me">
       </div>
       <div id="home" class="overlay active">
-        <h1>This site is about Adam Hayward</h1>
-        <p>
-          This not what Adam looks like.
-        </p>
+        <div>
+          <h1>Meet Adam Hayward</h1>
+          <p>
+            This is Adam's head on another man's torso.
+          </p>
+        </div>
       </div>
       <div id="bio" class="overlay inactive">
         <h1>Bio</h1>
@@ -126,8 +128,16 @@
           <li id="involvement" class="expandable">
             <h2>Involvement</h2>
             <div>
+              <h3>CM Ambassadors</h3>
               <p>
-                Adam
+                Adam is a member of CM Ambassadors, a group of computational
+                students who work to improve their major and host its related
+                events
+              </p>
+              <h3>Clubs</h3>
+              <p>
+                Adam attends the GT Web Dev Club and the Design Club. Each of
+                these helps to make him a better web developer.
               </p>
             <div>
           </li>
@@ -136,10 +146,14 @@
 
       <div id="resume" class="overlay inactive">
         <h1>Resume</h1>
-        <h2>
-          Interested in hiring me?
-        </h2>
-        <a href="media/files/adam-hayward-resume.pdf" target="_blank">Download my resume</a>
+        <p>
+          I am currently looking for paid summer internships, and would be happy
+          to provide you with more information about me.
+        </p>
+        <p>
+          Interested? Great! <a href="media/files/adam-hayward-resume.pdf"
+          target="_blank">Download my resume</a>
+        </p>
       </div>
       <div id="projects" class="overlay inactive">
         <h1>Projects</h1>
@@ -215,8 +229,18 @@
       </div>
       <div id="contact" class="overlay inactive">
         <h1>Contact</h1>
-          <a href="https://github.com/dasEinhorn1"><img id='github' src="" alt='github' class='icon'/></a>
-          <a href=""><img id= "email" src="" alt="Email" class="icon"/></a>
+        <p>
+          If you have any questions, I am happy to answer them. You can find me
+          on Github, follow me on Twitter, or send me an email!
+        </p>
+        <div>
+          <a id='github' class='icon' href="https://github.com/dasEinhorn1" target="_blank"
+          data-toggle="tooltip" data-placement="top" title="Visit my GitHub"></a>
+          <a id='twitter'class='icon' href="https://twitter.com/AdamEqualsNerd" target="_blank"
+          data-toggle="tooltip" data-placement="bottom" title="Follow me on Twitter"></a>
+          <a  id= "email"class='icon' href="mailto:adam.hayward@gatech.edu" target="_blank"
+          data-toggle="tooltip" data-placement="top" title="Send me an email"></a>
+        </div>
       </div>
     </div>
   </body>
@@ -226,6 +250,7 @@
     widthFix(e);
     heightFix(e);
     $(".expandable>div").slideToggle(200,function(e){});
+    $('[data-toggle="tooltip"]').tooltip()
   });
   $(window).on("resize",function(e){
     widthFix(e);
