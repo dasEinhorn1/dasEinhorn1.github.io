@@ -85,7 +85,7 @@ var w=new World();
 var testRoom= new Room("testing room", "It fills you with a sense of despair.");
 testRoom.addExit("other testing room");
 var nextRoom= new Room("other testing room", "It smells like oranges in here!",
-"Your words echo off the orange scented walls. You are all alone");
+"Your words echo off the orange scented walls. You are all alone....");
 nextRoom.addExit("testing room");
 w.addRoom(testRoom);
 w.addRoom(nextRoom);
