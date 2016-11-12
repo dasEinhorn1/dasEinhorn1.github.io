@@ -64,12 +64,29 @@ input[type='submit']{
   border-left: 2px solid #A6E1FA;
   color:#A6E1FA;
 }
+.listHead{
+  margin-bottom: 0px;
+}
+ol,ul{
+  margin-top:5px;
+}
+.descriptive{
+  font-style: italic;
+  color:#1B5299;
+}
 .locator{
   color:green;
 }
 .error{
   color:#AF1818;
 }
-.system{
+.talkTip{
   color:#C9FFCD;
+}
+.system{
+  color:#694D75;
+}
+.lStart{
+  color:#A6E1FA !important;
+  font-style: normal;
 }

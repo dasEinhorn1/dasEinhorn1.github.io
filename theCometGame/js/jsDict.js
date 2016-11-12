@@ -31,11 +31,11 @@ if (!JSdict.prototype.getVal) {
 if (!JSdict.prototype.update) {
     JSdict.prototype.update = function (key, val) {
         if (key == null || val == null) {
-            return "Key or Value cannot be null";
+            throw "Key or Value cannot be null";
         }
         // Verify dict integrity before each operation
         if (keysLength != valsLength) {
-            return "Dictionary inconsistent. Keys length don't match values!";
+            throw "Dictionary inconsistent. Keys length don't match values!";
         }
         var keysLength = this.Keys.length;
         var valsLength = this.Values.length;
@@ -48,7 +48,7 @@ if (!JSdict.prototype.update) {
             }
         }
         if (!flag) {
-            return "Key does not exist";
+            throw "Key does not exist";
         }
     }
 }
@@ -60,23 +60,23 @@ if (!JSdict.prototype.add) {
         // Allow only strings or numbers as keys
         if (typeof (key) == "number" || typeof (key) == "string") {
             if (key == null || val == null) {
-                return "Key or Value cannot be null";
+                throw "Key or Value cannot be null";
             }
             if (keysLength != valsLength) {
-                return "Dictionary inconsistent. Keys length don't match values!";
+                throw "Dictionary inconsistent. Keys length don't match values!";
             }
             var keysLength = this.Keys.length;
             var valsLength = this.Values.length;
             for (var i = 0; i < keysLength; i++) {
                 if (this.Keys[i] == key) {
-                    return "Duplicate keys not allowed!";
+                    throw "Duplicate keys not allowed!";
                 }
             }
             this.Keys.push(key);
             this.Values.push(val);
         }
         else {
-            return "Only number or string can be key!";
+            throw "Only number or string can be key!";
         }
     }
 }
@@ -86,10 +86,10 @@ if (!JSdict.prototype.add) {
 if (!JSdict.prototype.remove) {
     JSdict.prototype.remove = function (key) {
         if (key == null) {
-            return "Key cannot be null";
+            throw "Key cannot be null";
         }
         if (keysLength != valsLength) {
-            return "Dictionary inconsistent. Keys length don't match values!";
+            throw "Dictionary inconsistent. Keys length don't match values!";
         }
         var keysLength = this.Keys.length;
         var valsLength = this.Values.length;
@@ -103,7 +103,7 @@ if (!JSdict.prototype.remove) {
             }
         }
         if (!flag) {
-            return "Key does not exist";
+            throw "Key does not exist";
         }
     }
 }
