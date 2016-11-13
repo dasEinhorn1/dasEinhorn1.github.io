@@ -7,10 +7,28 @@
     <script type="text/javascript" src="js/newJs/helpers.js"></script>
     <script type="text/javascript" src="js/newJs/exit.js"></script>
     <script type="text/javascript" src="js/newJs/room.js"></script>
+    <script type="text/javascript" src="js/newJs/player.js"></script>
+    <script type="text/javascript" src="js/newJs/container.js"></script>
+    <script type="text/javascript" src="js/newJs/item.js"></script>
+    <script type="text/javascript" src="js/newJs/world.js"></script>
+    <script type="text/javascript" src="js/newJs/commands.js"></script>
+    <script type="text/javascript" src="js/newJs/setup.js"></script>
     <link rel="stylesheet" href="styles.css" media="screen"/>
   </head>
   <body>
-    <script>
-    </script>
+    <div id="outputArea">
+      <h2>The Comet</h2>
+      <p>
+        A game adaptation of W.E.B Du Bois' <i>The Comet</i> programmed by Adam Hayward
+      </p>
+    </div>
+    <form id="inputArea">
+      <input type="text" name="commmand" autocomplete="off" placeholder="Type 'help' for help">
+      </input>
+      <input type="submit" name="submit"></input>
+    </form>
   </body>
+  <script>
+    w.update();
+  </script>
 </html>

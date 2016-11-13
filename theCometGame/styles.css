@@ -67,6 +67,15 @@ input[type='submit']{
 .listHead{
   margin-bottom: 0px;
 }
+.divider{
+  border-top: 1px dashed;
+  border-bottom: 1px dashed;
+  font-weight:bold;
+  font-style: italic;
+  margin-left:-1em;
+  margin-right: -1em;
+  text-align: center;
+}
 ol,ul{
   margin-top:5px;
 }
@@ -76,6 +85,7 @@ ol,ul{
 }
 .locator{
   color:green;
+  border-color: green;
 }
 .error{
   color:#AF1818;
@@ -89,4 +99,14 @@ ol,ul{
 .lStart{
   color:#A6E1FA !important;
   font-style: normal;
+}
+.firstP{
+  margin-bottom: 5px;
+}
+.addP{
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+p:not(.addP,.firstP) + .addP{
+  margin-bottom: 19.5px;
 }

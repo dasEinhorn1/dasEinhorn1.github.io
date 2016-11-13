@@ -34,7 +34,16 @@ Room.prototype.removeNPC = function (name) {
 Room.prototype.addExit = function (exit) {
   this.exits.push(exit);
 };
-
+Room.prototype.getExits = function () {
+  return this.exits;
+};
+Room.prototype.getExitNames = function () {
+  var tempA=[];
+  for(let exit of this.exits){
+    tempA.push(exit.name);
+  }
+  return tempA;
+};
 Room.prototype.addContainer = function (container) {
   this.containers.push(container);
 };
@@ -45,9 +54,9 @@ Room.prototype.getContainer = function (containerName) {
     }
   }
 };
-Room.prototype.retrieveItem(itemName,containerName='floor'){
+Room.prototype.retrieveItem = function(itemName,containerName='floor'){
   return this.getContainer(containerName).removeItem(itemName);
 };
-Room.prototype.placeItem(itemName,containerName='floor'){
+Room.prototype.placeItem = function(itemName,containerName='floor'){
   return this.getContainer(containerName).removeItem(itemName);
 };
