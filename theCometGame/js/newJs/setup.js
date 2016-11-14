@@ -86,7 +86,7 @@ var exits=[
   //6. vault clerk's office to Vault Stairs
   new Exit("Door to vault stairs","You unlocked the door to the vault stairs.\nDown you went.",
     function(world){
-      if(player.hasItem("Vault Clerk's Key")){
+      if(world.player.hasItem("Vault Clerk's Key")){
         return true;
       }else{
         return "The vault clerk looked at you confused, \"Um... Jim? You forgot to take the key.\"";
