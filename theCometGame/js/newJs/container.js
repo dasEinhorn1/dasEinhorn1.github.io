@@ -1,4 +1,4 @@
-var Container = function(name,description,openDescription){
+var Container = function(name,description,openDescription=""){
   this.cls="container";
   this.requirements=[];
   this.name=name;

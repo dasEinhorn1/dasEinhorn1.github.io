@@ -2,7 +2,7 @@ var Player= function(){
   this.cls="you";
   this.items=[];
   this.equipped=[];
-}
+};
 
 Player.prototype.addItem = function (item) {
   this.items.push(item);
@@ -26,4 +26,4 @@ Player.prototype.unequipItem = function (itemName) {
 };
 Player.prototype.say = function(words){
   return "'"+words+"'";
-}
+};

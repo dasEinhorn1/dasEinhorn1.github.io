@@ -104,7 +104,12 @@ var exits=[
     }
   )
 ]
-var items=[]
+var items=[
+  new Item("Vault Clerk's Key","You took the key off from the vault clerk. It was large, cold, and slightly rusted."),
+  new Item("Gold","You took the gold. It shined in your hands"),
+  new Item("Iron Bar", "You picked up the iron bar. It was heavy--but not so heavy that you couldn't lift it--and covered in a thin layer of mildew from sitting on the floor of the vault for so long.")
+]
+rooms[2].addItem(items[0]);
 w.addRooms(rooms);
 w.linkRooms(0, 1, exits[0],exits[1]);
 w.linkRooms(1, 3, exits[2],exits[3]);

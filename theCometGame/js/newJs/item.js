@@ -1,5 +1,4 @@
-var Item = function(name,description, equipable=false){
+var Item = function(name,description){
   this.name=name;
   this.description= description;
-  this.equipable=equipable;
 }

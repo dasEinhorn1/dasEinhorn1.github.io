@@ -13,6 +13,7 @@
 var Room = function(name, description){
   this.npcs=[];
   this.exits=[];
+  this.items=[];
   this.containers=[];
   this.name=name;
   this.description=description;
@@ -54,9 +55,17 @@ Room.prototype.getContainer = function (containerName) {
     }
   }
 };
-Room.prototype.retrieveItem = function(itemName,containerName='floor'){
+Room.prototype.retrieveItem = function(itemName,containerName=null){
+  if (containerName===null){
+    var item=findByName(this.items,itemName);
+    this.items=removeFromArray(this.items,itemName);
+    return item;
+  }
   return this.getContainer(containerName).removeItem(itemName);
 };
-Room.prototype.placeItem = function(itemName,containerName='floor'){
-  return this.getContainer(containerName).removeItem(itemName);
+Room.prototype.addItem = function(itemName,containerName=null){
+  if (containerName===null){
+    return this.items.push(itemName);
+  }
+  return this.getContainer(containerName).addItem(itemName);
 };
