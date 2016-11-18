@@ -4,17 +4,30 @@
     <meta charset="utf-8">
     <title>The Comet</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jsDict.js"></script>
-    <script type="text/javascript" src="js/outputObject.js"></script>
-    <script type="text/javascript" src="js/commands.js"></script>
-    <script type="text/javascript" src="js/discussion.js"></script>
-    <script type="text/javascript" src="js/world.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/newJs/helpers.js"></script>
+    <script type="text/javascript" src="js/newJs/exit.js"></script>
+    <script type="text/javascript" src="js/newJs/room.js"></script>
+    <script type="text/javascript" src="js/newJs/player.js"></script>
+    <script type="text/javascript" src="js/newJs/container.js"></script>
+    <script type="text/javascript" src="js/newJs/item.js"></script>
+    <script type="text/javascript" src="js/newJs/world.js"></script>
+    <script type="text/javascript" src="js/newJs/commands.js"></script>
+    <script type="text/javascript" src="js/newJs/setup.js"></script>
     <link rel="stylesheet" href="styles.css" media="screen"/>
   </head>
   <body>
+    <div id="nav">
+      <div id="title">
+        The Comet
+      </div>
+      <ul id="links">
+        <a href="map.html"><li>Map</li></a>
+        <a href="docs.html"><li>Documentation</li></a>
+        <a href="index.html"><li>Home</li></a>
+      </ul>
+    </div>
     <div id="outputArea">
-      <h2>The Comet</h2>
+
       <p>
         A game adaptation of W.E.B Du Bois' <i>The Comet</i> programmed by Adam Hayward
       </p>
@@ -25,4 +38,7 @@
       <input type="submit" name="submit"></input>
     </form>
   </body>
+  <script>
+    w.update();
+  </script>
 </html>

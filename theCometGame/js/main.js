@@ -1,6 +1,6 @@
 function div_pc() {
-    $("#outputArea").css('height', '' + Math.round(.8 * window.innerHeight)-50);
-    $("#inputArea").css('height',''+ Math.round(.2*window.innerHeight)-50);
+    $("#outputArea").css('height', '' + Math.round(.8 * (window.innerHeight-100))-50);
+    $("#inputArea").css('height',''+ Math.round(.2*(window.innerHeight-100))-50);
 }
 
 $(document).ready(function() {
