@@ -7,6 +7,11 @@ var Player= function(){
 Player.prototype.addItem = function (item) {
   this.items.push(item);
 };
+Player.prototype.addItems = function (items) {
+  for(let item of items){
+    this.addItem(item);
+  }
+};
 Player.prototype.hasItem = function (itemName){
   var item=findByName(this.items,itemName);
   return item!=null

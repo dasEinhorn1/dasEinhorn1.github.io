@@ -23,14 +23,14 @@ function findByName(array,name,caseSense=true){
   for(i in array){
     var n1=(caseSense) ? array[i].name:array[i].name.toUpperCase();
     var n2=(caseSense) ? name:name.toUpperCase();
-    if(n1=n2){
+    if(n1==n2){
       return array[i];
     }
   }
   return null;
 }
 function removeByName(array,name){
-  console.console.log("removeByName");
+  console.log("removeByName");
   try{
     return deleteFromArray(array,indexByName(array,name));
   }catch(e){
@@ -41,6 +41,20 @@ function removeByName(array,name){
   }
 }
 
+function getNames(objects){
+  var tempA=[]
+  for(let ob of objects){
+    tempA.push(ob.name);
+  }
+  return tempA;
+}
+function getNamesWithDesc(objects){
+  var tempA=[]
+  for(let ob of objects){
+    tempA.push(ob.name+"-- "+ob.description);
+  }
+  return tempA;
+}
 function isInt(string){
   return !isNaN(parseInt(string));
 }
@@ -81,6 +95,7 @@ function printUnorderedList(text,cls=""){
   return;
 }
 function printList(list,cls,type="ol",parent=document.getElementById("outputArea")){
+  console.log(list);
   var oul=document.createElement(type);
   parent.appendChild(oul);
   if (cls!=""){

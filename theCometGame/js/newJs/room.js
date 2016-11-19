@@ -49,27 +49,56 @@ Room.prototype.addContainer = function (container) {
   this.containers.push(container);
 };
 Room.prototype.getContainer = function (containerName) {
-  for(container in this.containers){
-    if (container.name==containerName){
+  for(let container of this.containers){
+    if (container.name.toLowerCase()==containerName.toLowerCase()){
       return container;
     }
   }
+  return null;
 };
 Room.prototype.retrieveItem = function(itemName,containerName=null){
-  console.log(itemName);
   if (containerName===null){
-    var item=findByName(this.items,itemName);
-    console.log("YO");
+    var item= (isInt(itemName))? this.items[parseInt(itemName)-1]: findByName(this.items,itemName,false);
+    console.log(item);
     if(item!=null){
       this.items=removeFromArray(this.items,item);
     }
     return item;
+  }else{
+    itemName= (isInt(itemName))? this.items[parseInt(itemName)-1].name: findByName(this.items,itemName,false);
+    return this.getContainer(containerName).removeItem(itemName);
   }
-  return this.getContainer(containerName).removeItem(itemName);
 };
-Room.prototype.addItem = function(itemName,containerName=null){
+Room.prototype.retrieveItems = function(containerName=null){
+  var items=[];
+  var container=this.getContainer(containerName);
+  if (container==null){
+    return null;
+  }
+  var opn=container.tryOpen(window.w);
+  if(opn!==true){
+    return opn;
+  }
+  items=container.removeAll();
+  return items;
+};
+Room.prototype.addItem = function(item,containerName=null){
   if (containerName===null){
-    return this.items.push(itemName);
+    return this.items.push(item);
   }
-  return this.getContainer(containerName).addItem(itemName);
+  return this.getContainer(containerName).addItem(item);
 };
+
+Room.prototype.search=function(world,target=null){
+  if(target===null){
+    return [getNamesWithDesc(this.items),getNames(this.containers)];
+  }else{
+    var items=this.retrieveItems(target);
+    if(items == null){
+      return "There was no "+target+" to search.";
+    }
+    else{
+      return items
+    }
+  }
+}

@@ -11,22 +11,17 @@ var Exit= function(name, description,requirement=function(){return true;}){
 Exit.prototype.setRequirement = function (reqFunc) { // add a requirement to the exit
   this.requirement=reqFunc;
 };
-Exit.prototype.isOpen = function (world) { // check to see that all requirementshave been met
-  if(this.requirement(world)!==true){
-    return false;
-  }
-  return true;
-};
-Exit.prototype.getReason = function (world) { // get reason why exit is closed
-  if(!this.isOpen(world)){
-    return this.requirement(world);
-  }
+Exit.prototype.tryOpen = function (world,test=false) { // check to see that all requirementshave been met
+  return this.requirement(world,test);
 };
 Exit.prototype.open = function (world) {
-  if(this.isOpen(world)){
+  var opn=this.tryOpen(world,true);
+  console.log(opn);
+  if(opn===true){
+    console.log("open");
     return this.description;
   }else{
-    return this.getReason(world);
+    return opn;
   }
 };
 Exit.prototype.setRoom=function(room){

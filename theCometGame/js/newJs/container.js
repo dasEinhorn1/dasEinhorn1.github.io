@@ -6,7 +6,7 @@ var Container = function(name,description="",req=function(w){return true;}){
   this.items=[];
 };
 Container.prototype.addItem = function (item) {
-  this.items.push();
+  this.items.push(item);
 };
 Container.prototype.addItems = function (items) {
   for(let item of items){
@@ -28,26 +28,34 @@ Container.prototype.removeItems = function (itemNames) {
   }
   return tempA;
 };
-Container.prototype.getContents = function(){
-  if(this.isOpen()){
+Container.prototype.removeAll = function(){
+  var temp=this.items;
+  this.items=[];
+  return temp;
+}
+Container.prototype.getContents = function(world){
+  var opn=this.tryOpen(world)
+  if(opn===true){
+    if(this.items.length>0){
       return this.items.slice();
+    }else{
+      return "It was empty."
+    }
   }else{
-    return false;
+    return opn;
   }
 };
 Container.prototype.addRequirement = function (reqFunc) { // add a requirement to the Container
-  this.requirements.push(reqFunc);
+  this.requirement=reqFunc;
 };
-Container.prototype.isOpen = function () { // check to see that all requirementshave been met
-  return requirement(world)===true;
-};
-Container.prototype.getReason = function (world) { // get reason why Container is closed
-  return this.requirement(world);
+Container.prototype.tryOpen = function (world,t=false) { // check to see that all requirementshave been met
+  return this.requirement(world,t);
 };
 Container.prototype.open = function (world) {
-  if(this.isOpen()){
+  var opn=this.tryOpen(world,true);
+  if(opn===true){
     return this.description;
   }else{
-    return getReason();
+    return opn;
   }
 };

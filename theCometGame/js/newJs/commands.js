@@ -16,11 +16,40 @@ var look= function(params, world){
 }
 
 var search=function(params, world){
-  if(params==[]){
-    printOrderedList(room.describeContainers())
+  if(params.length<1){
+    var nada1=false,
+        nada2=false;
+    var icList=world.currentRoom.search(world);
+    if(icList[0].length!=0){
+      printParagraph("Items:","descriptive listHead");
+      printOrderedList(icList[0],"descriptive");
+    }else{
+      nada1=true;
+    }if(icList[1].length!=0){
+      printParagraph("Containers:","descriptive listHead");
+      printOrderedList(icList[1],"descriptive");
+    }else{
+      nada2=true;
+    }
+    if(nada1 && nada2){
+      printParagraph("You didn't find anything.","error")
+    }else if(nada1){
+      printParagraph("You didn't find any items.","error")
+    }else if(nada2){
+      printParagraph("You didn't find any containers.","error")
+    }
+  }else{
+    target=params.join(" ").toLowerCase();
+    var items=world.currentRoom.search(world, target);
+    if(typeof items != 'string'){
+      printParagraph("Inside the "+target+" you found:","descriptive listHead");
+      printUnorderedList(getNames(items),"descriptive");
+      world.player.addItems(items);
+      printParagraph("You cleared out the "+target+".","descriptive");
+    }else{
+      printParagraph(items,"descriptive error");
+    }
   }
-  params.join(" ");
-  printParagraph("not yet implemented","error");
 }
 var take = function(params, world){
   if(params==[]){
@@ -28,7 +57,7 @@ var take = function(params, world){
     return;
   }
   var itemName=params.join(" ");
-  var item=world.currentRoom.retrieveItem(itemName,null,false);
+  var item=world.currentRoom.retrieveItem(itemName,null);
   if (item==null){
     printParagraph("You couldn't find it.","error")
     return;
@@ -40,10 +69,11 @@ var take = function(params, world){
 }
 var go= function(params,world){
   if(params.length<1){
-    printParagraph("Exits:","descriptive locator");
+    printParagraph("Exits:","descriptive locator listHead");
     printOrderedList(world.currentRoom.getExitNames(),"descriptive locator");
   }else{
     var enterText=world.playerEnters(params.join(" "));
+    console.log(enterText);
     if(!world.updated){
       printDivider(world.currentRoom.name.toUpperCase(),"locator");
       printParagraph(enterText,"descriptive locator");
@@ -82,9 +112,18 @@ function help(params, world){
     ],
     "Items:",["Not yet supported."]
   ],"system");
-
 }
-
+var inventory= function(params,world){
+  if(params.length<1){
+    var items=getNamesWithDesc(world.player.items);
+    if(items.length<1){
+      printParagraph("Your inventory is empty.","error")
+    }else{
+      printParagraph("INVENTORY","listHead descriptive");
+      printOrderedList(items);
+    }
+  }
+}
 function takeCommand(e){
   e.preventDefault();
   var form=e.currentTarget;
@@ -105,6 +144,8 @@ function callCommand(comm,params){
     look(params,window.w);
   }else if (comm=="search"){
     search(params,window.w);
+  }else if (comm=="inventory") {
+    inventory(params,window.w)
   }else if (comm=="") {
     return;
   }else{

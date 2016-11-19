@@ -97,7 +97,7 @@ var exits={
   "Down you went beneath Broadway, where the dim light filtered through the feet of hurrying men; down to the dark basement beneath; "+
   "down into the blackness and silence beneath that lowest cavern. Here with your dark lantern you groped in the bowel of the earth, under the world.",
     function(world){
-      if(world.player.hasItem("Vault Clerk's Key")){
+      if(world.player.hasItem("Vault Key")){
         return true;
       }else{
         return "The vault clerk looked at you confused, \"Um... Jim? You forgot to take the key.\"";
@@ -117,12 +117,13 @@ var exits={
   //8. Restart
   vault2Secret: new Exit("False Wall?","You pushed hard against the wall, and suddenly the whole black wall swung as on mighty hinges, and blackness yawned beyond. "+
     "You peered in; it was evidently a secret vault — some hiding place of the old bank unknown in newer times. You entered hesitatingly.",
-    function(world){
-      if(world.stage==2){
-        console.log("What")
+    function(world,t=false){
+      if(world.stage>0){
         return true;
       }else{
-        world.stage+=1;
+        if(t){
+          world.stage+=1;
+        }
         return "The wall seemed to give a bit as you threw yourself against it. Try again.";
       }
     }
@@ -168,7 +169,7 @@ var containers = {
       if(world.player.items.includes(items.ironBar)){
         return true;
       }else{
-        return "You pull, barehanded, on the lid of the chest. It doesn't budge. Maybefind something to pry it open...";
+        return "You pull, barehanded, on the lid of the chest. It doesn't budge. You should find something to pry it open...";
       }
   }),
   preSafe:new Container("President's Safe","You turned the dial carefully. 28. 42. 9... Click! The safe opened.",
@@ -182,7 +183,10 @@ var containers = {
   )
 };
 rooms[2].addItem(items.vaultKey);
-containers.preSafe.addItem(items.sunglasses)
+containers.feChest.addItems([items.gold,items.gold,items.gold,items.blackBox]);
+rooms[5].addItem(items.ironBar);
+rooms[5].addContainer(containers.feChest);
+containers.preSafe.addItem(items.sunglasses);
 rooms[3].addContainer(containers.preSafe);
 w.addRooms(rooms);
 w.linkRooms(0, 1, exits.steps2Lobby,exits.lobby2Steps);

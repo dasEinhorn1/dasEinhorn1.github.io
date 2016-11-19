@@ -36,7 +36,6 @@ World.prototype.playerEnters = function(exitName){
     var i=parseInt(exitName)-1;
     if (i>-1 && i<exits.length){
       var exit = exits[i];
-      console.log(exit);
     }else{
       throw "Not a room.";
     }
@@ -46,7 +45,8 @@ World.prototype.playerEnters = function(exitName){
       throw "Not a room.";
     }
   }
-  if(exit.isOpen(this)){
+  if(exit.tryOpen(this)===true){
+    console.log("Open!");
     this.currentRoom=exit.room;
     this.updated=false;
   }else{
