@@ -32,7 +32,8 @@ var rooms=[
   new Room("Lower Vaults","Here at last was peace. You groped moodily forward as a great rat leapt past you and cobwebs crept across your face. "+
   "You felt carefully around the room. Nothing but an iron bar on the floor. At the far end, the wall felt different. You pounded and pushed and pried. Nothing."),
   //5. Secret Vaults
-  new Room("Secret Vault","It was a long, narrow room with shelves, and at the far end an old iron chest. It was old, strong, and rusty.")
+  new Room("Secret Vault","It was a long, narrow room with shelves, and at the far end an old iron chest. A network of cobwebs, caught in the dim light of your lantern,"+
+  " wove across the ceiling above. Small white spiders retreated into it, fearful of the light which they had lived so long without. ")
 ]
 
 var exits={
@@ -52,9 +53,10 @@ var exits={
   lobby2Steps:new Exit("Doors to Bank Steps","You pushed through the doors to the bank steps. You just needed to get out of there-- away from those bodies.",
     function(world){
       if (world.stage==0){
-        return "The president was watching. You're black. He's white. Do not cross him.";
+        return "The president looked disapprovingly from his office. \"I am black,\" you said under your breath. \"I can't get away with leaving work like this.\"";
       }else{
-        return true;
+        return "If you went out the front, someone might see you. You're black. No trial necessary. You'd somehow survived, you weren't about to throw it away.\n"+
+        "Find another exit.";
       }
     }
   ),
@@ -63,7 +65,7 @@ var exits={
   lobby2Pres:new Exit("Door to president's office","The door clicked open. You carefully stepped inside.",
     function(world){
       if(world.stage==0){
-        return "The president's secretary stopped you. \"Jim the president told you to go to the vaults. Get along now.\"";
+        return "The president's secretary stopped you. \"The president told you to go to the vaults. If he wanted to talk more, he'd have set up a meeting with you. Get along.\"";
       }else{
         return true;
       }
@@ -76,9 +78,6 @@ var exits={
   //4. bank lobby to vault clerk's office
   lobby2Clerk:new Exit("Entrance to vault clerk's office", "You entered the vault clerk's office.",
     function(world){
-      if (world.stage>0){
-        return "You did not want to go back in there.";
-      }
       return true;
     }
   ),
@@ -86,7 +85,7 @@ var exits={
   clerk2Lobby:new Exit("Door to bank lobby","You needed to get help. You ran from the vault clerk's office.",
     function(world){
       if(world.stage<1){
-        return "Better to just get this over with.";
+        return "\"Boy, the vaults are back there. Where are you going?\" The vault clerk said adjusting his spectacles as he peered over his paper at you.";
       }else{
         return true;
       }
@@ -100,14 +99,18 @@ var exits={
       if(world.player.hasItem("Vault Key")){
         return true;
       }else{
-        return "The vault clerk looked at you confused, \"Um... Jim? You forgot to take the key.\"";
+        return "The vault clerk looked at you confused.\"Pick up the vault key.\"";
       }
     }
   ),
   //7. Vault Stairs to vault clerk's office
-  vault2Clerk:new Exit("Door to vault clerk's office","You slammed open the door and scrambled into the vault clerk's office.",
+  vault2Clerk:new Exit("Door to vault clerk's office","With a sigh you went methodically to work. Cold sweat stood on your forehead; "+
+    "but you searched, pounded, pushed, and worked until after what seemed endless hours thi iron bar struck a cold bit of metal and the great "+
+    "door swung again harshly on its hinges, and then, striking against something soft and heavy, stopped. You had just room to squeeze through.\n"+
+    "There lay the body of the vault clerk, cold and stiff. You stared at it, and then felt sick and nauseated. The air seemed unaccountably foul, "+
+    "with a strong, peculiar odor. You stepped forward, clutched at the air, and fell fainting across the corpse.",
     function(world){
-      if (world.stage>0){
+      if (world.stage>2){
         return true;
       }else{
         return "You didn't want to turn back without those records."
@@ -130,11 +133,18 @@ var exits={
   ),
   secret2Vault: new Exit("Exit to Lower Vault","\"Boom!\"\nA low, grinding, reverberating crash struck upon your ear as you emerged from the secret vault. "+
     "You started up and looked about. All was black and still. You groped for your light and swung it about you. Then you knew! The great door had swung to."+
-    "You were trapped in the lower vaults."
+    "You were trapped in the lower vaults.",
+    function(world){
+      if(world.player.items.includes(items.record2) && world.player.items.includes(items.record2)){
+        world.stage=3;
+        return true;
+      }
+      return "\"I am here for the records first. They must be in here somewhere,\" you thought to yourself as you backed away from the exit."
+    }
   )
 }
 var items={
-  vaultKey:new Item("Vault Key","It was large, cold, and slightly rusted."),
+  vaultKey:new Item("Vault Key","It was coated in rust, but it would open the door to the lower vaults. "),
   gold:new Item("Gold","You took the gold. It shined in your hands"),
   ironBar:new Item("Iron Bar", "It was heavy, coated in a thick layer of mildew and slime, but it would certainly come in handy."),
   sunglasses:new Item("Special sunglasses","They were metallic with a small horizontal slit on each metal eye covering. What a strange fashion choice..."),
@@ -145,7 +155,7 @@ var items={
   nyTimes: new Item("New York Times","\"Danger!\" screamed its black headlines, \"Warnings wired around the world. The Comet's tail sweeps past us at noon. "+
     "Deadly gases expected. Close doors and windows. Seek the cellar\""),
   food: new Item("Gourmet food","It was a gourmet meal--one you never could've gotten before the apocalypse."),
-  natEnquirer: new Item("\"President Harding A Criminal?\" its headline read. \"The Federal Bureau of Investigation has recovered a new batch "+
+  natEnquirer: new Item("National Enquirer","\"President Harding A Criminal?\" its headline read. \"The Federal Bureau of Investigation has recovered a new batch "+
     "of highly classified mail sent by Harding to fellow leadership from his personal post office! "+
     "Despite having denied the severity of this blunder, Harding will face criminal charges once the next administration takes office.\""),
   juliaPhoto: new Item("Photo of Julia","Julia standing and a man about her age. They looked happy..."),
@@ -169,9 +179,22 @@ var containers = {
       if(world.player.items.includes(items.ironBar)){
         return true;
       }else{
-        return "You pull, barehanded, on the lid of the chest. It doesn't budge. You should find something to pry it open...";
+        return "You pulled, barehanded, on the lid of the chest. It didn't budge. You needed something to pry it open...";
       }
   }),
+  shelves:[
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf."),
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf."),
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf."),
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf."),
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf."),
+    new Container("shelf","You brushed back cobwebs to uncover the items on the old shelf.")
+  ],
+  secretary:new Container("The secretary","You did your best not to make eye contact with her as you took the note from her hand.",
+    function(world){
+      world.stage=5;
+    }
+  ),
   preSafe:new Container("President's Safe","You turned the dial carefully. 28. 42. 9... Click! The safe opened.",
     function(world){
       if(world.player.items.includes(items.presCode)){
@@ -182,11 +205,17 @@ var containers = {
     }
   )
 };
+var int1=getRandomInt(0,6);
+var int2=getRandomInt(0,6);
+containers.shelves[int2].addItem(items.record1);
+containers.shelves[int1].addItem(items.record2);
+containers.secretary.addItem(items.presCode);
 rooms[2].addItem(items.vaultKey);
 containers.feChest.addItems([items.gold,items.gold,items.gold,items.blackBox]);
 rooms[5].addItem(items.ironBar);
 rooms[5].addContainer(containers.feChest);
-containers.preSafe.addItem(items.sunglasses);
+rooms[5].addContainers(containers.shelves);
+containers.preSafe.addItem(items.natEnquirer);
 rooms[3].addContainer(containers.preSafe);
 w.addRooms(rooms);
 w.linkRooms(0, 1, exits.steps2Lobby,exits.lobby2Steps);

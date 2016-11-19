@@ -39,13 +39,22 @@ var search=function(params, world){
       printParagraph("You didn't find any containers.","error")
     }
   }else{
-    target=params.join(" ").toLowerCase();
+    var targetName=params.join(" ").toLowerCase();
+    var target=null;
+    if(isInt(targetName) && (parseInt(targetName)>0 && parseInt(targetName)<=world.currentRoom.containers.length)){
+      target=parseInt(targetName)-1;
+      targetName=getNames(world.currentRoom.containers)[parseInt(targetName)-1];
+    }else{
+      target=getNames(world.currentRoom.containers).findIndex(function(nm){
+        return nm.toLowerCase()==targetName.toLowerCase();
+      });
+    }
     var items=world.currentRoom.search(world, target);
     if(typeof items != 'string'){
-      printParagraph("Inside the "+target+" you found:","descriptive listHead");
+      printParagraph("From the "+targetName+" you took:","descriptive listHead");
       printUnorderedList(getNames(items),"descriptive");
       world.player.addItems(items);
-      printParagraph("You cleared out the "+target+".","descriptive");
+      printParagraph("You cleared out the "+targetName+".","descriptive");
     }else{
       printParagraph(items,"descriptive error");
     }
@@ -63,6 +72,7 @@ var take = function(params, world){
     return;
   }else{
     world.player.addItem(item);
+    printParagraph("You took the "+item.name.toLowerCase(),"system");
     printParagraph(item.description,"descriptive");
     return;
   }
@@ -120,7 +130,7 @@ var inventory= function(params,world){
       printParagraph("Your inventory is empty.","error")
     }else{
       printParagraph("INVENTORY","listHead descriptive");
-      printOrderedList(items);
+      printOrderedList(items,"descriptive");
     }
   }
 }

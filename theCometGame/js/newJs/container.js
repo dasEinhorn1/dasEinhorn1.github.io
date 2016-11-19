@@ -4,6 +4,7 @@ var Container = function(name,description="",req=function(w){return true;}){
   this.name=name;
   this.description= description;
   this.items=[];
+  this.searched=false;
 };
 Container.prototype.addItem = function (item) {
   this.items.push(item);
@@ -54,6 +55,8 @@ Container.prototype.tryOpen = function (world,t=false) { // check to see that al
 Container.prototype.open = function (world) {
   var opn=this.tryOpen(world,true);
   if(opn===true){
+    this.searched=true;
+    this.name+= "*";
     return this.description;
   }else{
     return opn;

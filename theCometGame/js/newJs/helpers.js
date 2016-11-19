@@ -29,6 +29,11 @@ function findByName(array,name,caseSense=true){
   }
   return null;
 }
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
 function removeByName(array,name){
   console.log("removeByName");
   try{
@@ -129,7 +134,7 @@ function slowPrint(text,target){
   }else{
     target.innerHTML += text[0];
   }
-  setTimeout(function(){slowPrint(text.slice(1),target)}, 10);
+  slowPrint(text.slice(1),target);
 }
 
 if(typeof(String.prototype.trim) === "undefined")

@@ -46,7 +46,6 @@ World.prototype.playerEnters = function(exitName){
     }
   }
   if(exit.tryOpen(this)===true){
-    console.log("Open!");
     this.currentRoom=exit.room;
     this.updated=false;
   }else{
@@ -60,6 +59,21 @@ World.prototype.update = function () {
   // this function will update all necessary things to meet current stage (rooms, exits, people, etc.)
   if(this.updated){
     return;
+  }if(this.stage==3){
+    this.rooms[4].description="Nothing moved in the vaults as you stood cut from the world above. Your lantern flickered nervously.\n Time to figure out a way out."
+    this.rooms[4].exits[1].name="Door to secret vault";
+    this.rooms[2].description="You awoke with a sense of horror, leaped from the body, and groped up the stairs, calling to the guard. Nobody answered.";
+    this.rooms[1].description="The stillness of death lay everywhere and everywhere bowed, bent, and stretched the silent forms of men. "+
+      "You paused and glanced about. You were not a man easily moved; but the sight was appalling! The lobby, which just hours ago had been full "+
+      "of lively New Yorkers was now a maze of bodies. At her desk in front of the president's office, the secretary was collapsed in a mess of frothy sick. "+
+      "Her hand, frozen in place, held out a note.";
+    this.rooms[1].addContainer(containers.secretary);
+    this.stage=4;
+  }if(this.stage==5){
+    this.rooms[1].description="The stillness of death lay everywhere and everywhere bowed, bent, and stretched the silent forms of men. "+
+      "You paused and glanced about. You were not a man easily moved; but the sight was appalling! The lobby, which just hours ago had been full "+
+      "of lively New Yorkers was now a maze of bodies. At her desk in front of the president's office, the secretary was collapsed in a mess of frothy sick"
   }
+  console.log("!!!!!!!UPDATING!!!!!!!");
   look([],this);
 };

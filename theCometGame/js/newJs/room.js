@@ -48,6 +48,11 @@ Room.prototype.getExitNames = function () {
 Room.prototype.addContainer = function (container) {
   this.containers.push(container);
 };
+Room.prototype.addContainers = function (containers) {
+  for(let container of containers){
+    this.addContainer(container);
+  }
+};
 Room.prototype.getContainer = function (containerName) {
   for(let container of this.containers){
     if (container.name.toLowerCase()==containerName.toLowerCase()){
@@ -69,17 +74,18 @@ Room.prototype.retrieveItem = function(itemName,containerName=null){
     return this.getContainer(containerName).removeItem(itemName);
   }
 };
-Room.prototype.retrieveItems = function(containerName=null){
-  var items=[];
-  var container=this.getContainer(containerName);
-  if (container==null){
+Room.prototype.retrieveItems = function(i){
+  var container=this.containers[i];
+  if (container===undefined){
     return null;
   }
-  var opn=container.tryOpen(window.w);
-  if(opn!==true){
-    return opn;
+  var opn=container.open(window.w);
+  if(!container.searched){
+    return opn
   }
-  items=container.removeAll();
+  var items=container.removeAll();
+  console.log(items);
+  printParagraph(container.description,"system");
   return items;
 };
 Room.prototype.addItem = function(item,containerName=null){
@@ -95,9 +101,11 @@ Room.prototype.search=function(world,target=null){
   }else{
     var items=this.retrieveItems(target);
     if(items == null){
-      return "There was no "+target+" to search.";
-    }
-    else{
+      return "Couldn't find any left to search.";
+    }else if(items.length<1){
+      return "It was empty."
+    }else{
+      console.log(items);
       return items
     }
   }
