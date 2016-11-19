@@ -56,9 +56,13 @@ Room.prototype.getContainer = function (containerName) {
   }
 };
 Room.prototype.retrieveItem = function(itemName,containerName=null){
+  console.log(itemName);
   if (containerName===null){
     var item=findByName(this.items,itemName);
-    this.items=removeFromArray(this.items,itemName);
+    console.log("YO");
+    if(item!=null){
+      this.items=removeFromArray(this.items,item);
+    }
     return item;
   }
   return this.getContainer(containerName).removeItem(itemName);

@@ -19,15 +19,18 @@ function indexByName(array,name){
   }
   return -1;
 }
-function findByName(array,name){
+function findByName(array,name,caseSense=true){
   for(i in array){
-    if(array[i].name==name){
+    var n1=(caseSense) ? array[i].name:array[i].name.toUpperCase();
+    var n2=(caseSense) ? name:name.toUpperCase();
+    if(n1=n2){
       return array[i];
     }
   }
   return null;
 }
 function removeByName(array,name){
+  console.console.log("removeByName");
   try{
     return deleteFromArray(array,indexByName(array,name));
   }catch(e){

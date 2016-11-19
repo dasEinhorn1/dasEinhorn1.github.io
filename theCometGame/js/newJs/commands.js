@@ -22,7 +22,22 @@ var search=function(params, world){
   params.join(" ");
   printParagraph("not yet implemented","error");
 }
-
+var take = function(params, world){
+  if(params==[]){
+    printParagraph("Specify what to take, or use search to take everything.","error")
+    return;
+  }
+  var itemName=params.join(" ");
+  var item=world.currentRoom.retrieveItem(itemName,null,false);
+  if (item==null){
+    printParagraph("You couldn't find it.","error")
+    return;
+  }else{
+    world.player.addItem(item);
+    printParagraph(item.description,"descriptive");
+    return;
+  }
+}
 var go= function(params,world){
   if(params.length<1){
     printParagraph("Exits:","descriptive locator");
@@ -82,8 +97,8 @@ function takeCommand(e){
 function callCommand(comm,params){
   if(comm== 'help'){
     help();
-  }else if(comm=="say"){
-    say(params,window.w);
+  }else if(comm=="take"){
+    take(params,window.w);
   }else if (comm=="go") {
     go(params,window.w);
   }else if(comm=="look"){

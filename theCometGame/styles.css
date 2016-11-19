@@ -107,8 +107,20 @@ ol,ul{
   margin-top: 0px;
   margin-bottom: 5px;
 }
+.unimplemented{
+  text-decoration: line-through;
+}
 p:not(.addP,.firstP) + .addP{
   margin-bottom: 19.5px;
+}
+.active{
+  text-decoration: underline !important;
+}
+#instructions>ul{
+  line-height: 1em;
+}
+#instructions ul{
+  line-height: 1.5em;
 }
 #main{
   background-color: #fff;
@@ -145,4 +157,7 @@ p:not(.addP,.firstP) + .addP{
 }
 #nav a:hover{
   text-decoration: underline;
+}
+#nav #title a{
+  float:none;
 }

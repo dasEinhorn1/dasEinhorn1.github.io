@@ -4,21 +4,17 @@
     <meta charset="utf-8">
     <title>The Comet</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/newJs/helpers.js"></script>
-    <script type="text/javascript" src="js/newJs/exit.js"></script>
-    <script type="text/javascript" src="js/newJs/room.js"></script>
-    <script type="text/javascript" src="js/newJs/player.js"></script>
-    <script type="text/javascript" src="js/newJs/container.js"></script>
-    <script type="text/javascript" src="js/newJs/item.js"></script>
-    <script type="text/javascript" src="js/newJs/world.js"></script>
-    <script type="text/javascript" src="js/newJs/commands.js"></script>
-    <script type="text/javascript" src="js/newJs/setup.js"></script>
     <link rel="stylesheet" href="styles.css" media="screen"/>
+    <style media="screen">
+      body{
+        overflow: auto;
+      }
+    </style>
   </head>
   <body>
     <div id="nav">
       <div id="title">
-        The Comet
+        <a href="index.html">The Comet</a>
       </div>
       <ul id="links">
         <a href="map.html"><li>Map</li></a>
@@ -26,9 +22,69 @@
         <a href="index.html"><li>Home</li></a>
       </ul>
     </div>
-    <h3>Documentation</h3>
-    <p>
-      To download a zip file of all the process documents I made, click <a href="documentation.zip">here</a>
-    </p>
+    <div>
+      <h3>Documentation</h3>
+      <p>
+        Thank You for playing my game! It really means a lot to know people notice my work.
+      </p>
+      <p>
+        In case you feel stuck, here are some instructions for the game.
+        <b>Note: Unimplemented features will look like <span class="unimplemented">this</span></b>
+      </p>
+      <ol id="instructions" class="system">
+        <li>Getting Started
+          <ul>
+            <li>You start off in the game with nothing. That is okay, you don't need anything yet.</li>
+            <li>This game is text-based, meaning you type commands to get around and interact with people and things.</li>
+            <li>To start off, you should know you have the following commands:
+              <ul>
+                <li><span class="talkTip">look- </span>describes the room you are in</li>
+                <li class="unimplemented"><span class="talkTip">speak- </span>opens a dialogue with things to say, or you can say what you want</li>
+                <li class="unimplemented"><span class="talkTip">search- </span>searches a room, container, or body for items. Takes any items automatically</li>
+                <li><span class="talkTip">go- </span>lists exits for each area, and allows you to choose exits by number</li>
+                <li><span class="talkTip">take- </span>takes a specified item from a room. Like search, but for single items and more general use</li>
+                <li><span class="talkTip">help- </span>prints out a help menu for quick reference</li>
+              </ul>
+            </li>
+            <li>It seems like a lot to deal with, but it will feel natural asyou play longer.</li>
+            <li>Start off by typing 'look' to view your surroundings!</li>
+          </ul>
+        </li>
+        <li>Getting Around
+          <ul>
+            <li>In order to go from room to room, you should use 'go' to list your exit options.</li>
+            <li>Each exit option will have a number before it. To choose that exit, use 'go &lt;number&gt;' where &lt;number&gt; is the number for the exit.</li>
+            <li>Locked Areas
+              <ul>
+                <li>Some areas have certain requirements in order for you to enter or exit them.</li>
+                <li>Don't get stressed, just find another exit or find the thing to open it up.</li>
+                <li>If an exit is unavailable, a message will show up in <span class="error">this color</span>.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="unimplemented">Speech
+          <ul>
+            <li>Use 'speak' to talk to characters in the game.</li>
+            <li>It works like 'go'
+              <ul>
+                <li>'speak' lists options with corresponding numbers</li>
+                <li>'speak &lt;num&gt;' picks an option</li>
+              </ul>
+            </li>
+            <li>Your options will change over time too, as people's conversations go on.</li>
+          </ul>
+        </li>
+        <li class="unimplemented">Scavenging
+          <ul>
+            <li>Use 'search' to search an area, body, or container for items.</li>
+            <li>Use 'take' to take an item sitting in a room. (not for items on bodies or in containers)</li>
+          </ul>
+        </li>
+      </ol>
+      <p style="text-align:center;">
+        To view of all the process documents I made, click <a href="CometDocumentation.pdf">here</a>.
+      </p>
+  </div>
   </body>
 </html>
