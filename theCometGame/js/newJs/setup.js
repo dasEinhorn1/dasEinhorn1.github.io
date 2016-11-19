@@ -35,9 +35,9 @@ var rooms=[
   new Room("Secret Vault","It was a long, narrow room with shelves, and at the far end an old iron chest. It was old, strong, and rusty.")
 ]
 
-var exits=[
+var exits={
   //0. bank steps to lobby, stage 0
-  new Exit("Doors to Bank Lobby","You followed the president into the bank.\n Of course he wanted you to go down to the lower vaults. "+
+  steps2Lobby:new Exit("Doors to Bank Lobby","You followed the president into the bank.\n Of course he wanted you to go down to the lower vaults. "+
   "It was too dangerous for more valuable men.",
     function(world){
       if (world.stage<1){
@@ -49,10 +49,10 @@ var exits=[
   ),
 
   //1. bank lobby to bank steps
-  new Exit("Doors to Bank Steps","You pushed through the doors to the bank steps. You just needed to get out of there-- away from those bodies.",
+  lobby2Steps:new Exit("Doors to Bank Steps","You pushed through the doors to the bank steps. You just needed to get out of there-- away from those bodies.",
     function(world){
       if (world.stage==0){
-        return "The president was watching. You're black. He's white. Don't cross him.";
+        return "The president was watching. You're black. He's white. Do not cross him.";
       }else{
         return true;
       }
@@ -60,7 +60,7 @@ var exits=[
   ),
 
   //2. bank lobby to president's office
-  new Exit("Door to president's office","The door clicked open. You carefully stepped inside.",
+  lobby2Pres:new Exit("Door to president's office","The door clicked open. You carefully stepped inside.",
     function(world){
       if(world.stage==0){
         return "The president's secretary stopped you. \"Jim the president told you to go to the vaults. Get along now.\"";
@@ -71,10 +71,10 @@ var exits=[
   ),
 
   //3. president's office to bank lobby
-  new Exit("Door to bank lobby", "You frantically flung the door open and rushed back into the lobby."),
+  pres2Lobby:new Exit("Door to bank lobby", "You frantically flung the door open and rushed back into the lobby."),
 
   //4. bank lobby to vault clerk's office
-  new Exit("Entrance to vault clerk's office", "You entered the vault clerk's office.",
+  lobby2Clerk:new Exit("Entrance to vault clerk's office", "You entered the vault clerk's office.",
     function(world){
       if (world.stage>0){
         return "You did not want to go back in there.";
@@ -83,7 +83,7 @@ var exits=[
     }
   ),
   //5. vault clerk's office to bank lobby
-  new Exit("Door to bank lobby","You needed to get help. You ran from the vault clerk's office.",
+  clerk2Lobby:new Exit("Door to bank lobby","You needed to get help. You ran from the vault clerk's office.",
     function(world){
       if(world.stage<1){
         return "Better to just get this over with.";
@@ -93,7 +93,7 @@ var exits=[
     }
   ),
   //6. vault clerk's office to Lower Vaults
-  new Exit("Door to lower vaults","You opened the great iron door with the vault key, and passed silently down the stairs.\n"+
+  clerk2Vault:new Exit("Door to lower vaults","You opened the great iron door with the vault key, and passed silently down the stairs.\n"+
   "Down you went beneath Broadway, where the dim light filtered through the feet of hurrying men; down to the dark basement beneath; "+
   "down into the blackness and silence beneath that lowest cavern. Here with your dark lantern you groped in the bowel of the earth, under the world.",
     function(world){
@@ -105,7 +105,7 @@ var exits=[
     }
   ),
   //7. Vault Stairs to vault clerk's office
-  new Exit("Door to vault clerk's office","You slammed open the door and scrambled into the vault clerk's office.",
+  vault2Clerk:new Exit("Door to vault clerk's office","You slammed open the door and scrambled into the vault clerk's office.",
     function(world){
       if (world.stage>0){
         return true;
@@ -115,20 +115,76 @@ var exits=[
     }
   ),
   //8. Restart
-  new Exit("End of demo","More coming soon!",
-    function(world){return "End of demo";}
+  vault2Secret: new Exit("False Wall?","You pushed hard against the wall, and suddenly the whole black wall swung as on mighty hinges, and blackness yawned beyond. "+
+    "You peered in; it was evidently a secret vault — some hiding place of the old bank unknown in newer times. You entered hesitatingly.",
+    function(world){
+      if(world.stage==1){
+        return true;
+      }
+      world.stage+=1;
+      return "The wall seemed to give a bit as you threw yourself against it. Try again.";
+    }
+  ),
+  secret2Vault: new Exit("Exit to Lower Vault",\"Boom!\"\nA low, grinding, reverberating crash struck upon your ear as you emerged from the secret vault. "+
+    "You started up and looked about. All was black and still. You groped for your light and swung it about you. Then you knew! The great door had swung to."+
+    "You were trapped in the lower vaults."
   )
-]
-var items=[
-  new Item("Vault Key","You took the key off from the vault clerk. It was large, cold, and slightly rusted."),
-  new Item("Gold","You took the gold. It shined in your hands"),
-  new Item("Iron Bar", "You picked up the iron bar. It was heavy--but not so heavy that you couldn't lift it--and covered in a thin layer of mildew from sitting on the floor of the vault for so long.")
-]
-rooms[2].addItem(items[0]);
+}
+var items={
+  vaultKey:new Item("Vault Key","It was large, cold, and slightly rusted."),
+  gold:new Item("Gold","You took the gold. It shined in your hands"),
+  ironBar:new Item("Iron Bar", "It was heavy, coated in a thick layer of mildew and slime, but it would certainly come in handy."),
+  sunglasses:new Item("Special sunglasses","They were metallic with a small horizontal slit on each metal eye covering. What a strange fashion choice..."),
+  blackBox: new Item("Black box","Etched into it were the words \"DATA THIEF\" Whatever that meant..."),
+  record1: new Item("Record: 1900-1901","It had collected dust for years. The title peeked through layers of dust: \"BANK RECORDS: 1900-1901\""),
+  record2: new Item("Record: 1901-1902","It had collected dust for years. The title peeked through layers of dust: \"BANK RECORDS: 1901-1902\""),
+  presCode: new Item("President's code", "His secretary had written something at the top of the note:\"SAFE CODE: 28 42 9\""),
+  nyTimes: new Item("New York Times","\"Danger!\" screamed its black headlines, \"Warnings wired around the world. The Comet's tail sweeps past us at noon. "+
+    "Deadly gases expected. Close doors and windows. Seek the cellar\""),
+  food: new Item("Gourmet food","It was a gourmet meal--one you never could've gotten before the apocalypse."),
+  natEnquirer: new Item("\"President Harding A Criminal?\" its headline read. \"The Federal Bureau of Investigation has recovered a new batch "+
+    "of highly classified mail sent by Harding to fellow leadership from his personal post office! "+
+    "Despite having denied the severity of this blunder, Harding will face criminal charges once the next administration takes office.\""),
+  juliaPhoto: new Item("Photo of Julia","Julia standing and a man about her age. They looked happy..."),
+  carKey: new Item("Car key","What kind of luxury car did this belong to?"),
+  babyPhoto: new Item("Baby Photo", "There she was--your baby girl. Hopefully she didn't have to suffer."),
+  wifePhoto: new Item("Wedding Photo", "They took this on your wedding day. Nothing fancy, but you can tell howmuch she loved you from the look on her face. Now you were alone."),
+  elevatorKey:  new Item("Elevator Key", "It was a key, nothing exciting. Go use it already."),
+  juliaNote: new Item("Note for Julia","\"Dear Daughter:\" it read. \"I have gone for a hundred-mile spin in Fred's new Mercedes. "+
+    "Shall not be back before dinner. I'll bring Fred with me. --J.B.H.\""),
+  largeRug: new Item("Large rug","It was a large, ornate rug, big enough to keep you both warm."),
+  blazer: new Item("Blazer","It was a bit small for you, but it would keep Julia warm."),
+  coat: new Item("Coat","It fit perfectly. No worries about being cold now."),
+  mConn:new Item("Strange album",""Parliament: Mothership Connection." Never heard of it… The man on the album cover had the strangest outfit"+
+    "-- some chrome colored getup. He seemed to be sliding out of the door of a flying saucer."),
+  bills: new Item("Roll of bills", "Their attempt to turn your good will into a business transaction. Still, it was good money--about $60.")
+}
+var containers = {
+  feChest:new Container("Iron chest","You began to pry with your iron bar. The rust had eaten a hundred years, and it had gone deep."+
+  " Slowly, wearily, the old lid lifted, and with a last, low groan lay bare its treasure — and you saw the dull sheen of gold!",
+    function(world){
+      if(world.player.items.includes(items.ironBar)){
+        return true;
+      }else{
+        return "You pull, barehanded, on the lid of the chest. It doesn't budge. Maybefind something to pry it open...";
+      }
+  }),
+  preSafe:new Container("President's Safe","You turned the dial carefully. 28. 42. 9... Click! The safe opened.",
+    function(world){
+      if(world.player.items.includes(items.presCode)){
+        return true;
+      }else{
+        return "This was quality lock. You would need to find the poor bastard's code to open it.";
+      }
+    }
+  )
+};
+rooms[2].addItem(items.vKey);
+containers.preSafe.addItem(items.sunglasses)
+rooms[3].addContainer(containers.preSafe);
 w.addRooms(rooms);
-w.linkRooms(0, 1, exits[0],exits[1]);
-w.linkRooms(1, 3, exits[2],exits[3]);
-w.linkRooms(1, 2, exits[4],exits[5]);
-w.linkRooms(2, 4, exits[6],exits[7]);
-w.linkRooms(4, 0, exits[8],exits[8]);
+w.linkRooms(0, 1, exits.steps2Lobby,exits.lobby2Steps);
+w.linkRooms(1, 3, exits.lobby2Pres,exits.presToLobby);
+w.linkRooms(1, 2, exits.lobby2Clerk,exits.clerk2Lobby);
+w.linkRooms(2, 4, exits.clerk2Vault,exits.vault2Clerk);
 w.setCurrentRoom(0);

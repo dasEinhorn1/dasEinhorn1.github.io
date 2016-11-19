@@ -1,9 +1,8 @@
-var Container = function(name,description,openDescription=""){
+var Container = function(name,description="",req=function(w){return true;}){
   this.cls="container";
-  this.requirements=[];
+  this.requirement=req;
   this.name=name;
   this.description= description;
-  this.openDescription=openDescription;
   this.items=[];
 };
 Container.prototype.addItem = function (item) {
@@ -47,7 +46,7 @@ Container.prototype.getReason = function (world) { // get reason why Container i
 };
 Container.prototype.open = function (world) {
   if(this.isOpen()){
-    return this.openDescription;
+    return this.description;
   }else{
     return getReason();
   }
