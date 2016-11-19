@@ -118,14 +118,16 @@ var exits={
   vault2Secret: new Exit("False Wall?","You pushed hard against the wall, and suddenly the whole black wall swung as on mighty hinges, and blackness yawned beyond. "+
     "You peered in; it was evidently a secret vault — some hiding place of the old bank unknown in newer times. You entered hesitatingly.",
     function(world){
-      if(world.stage==1){
+      if(world.stage==2){
+        console.log("What")
         return true;
+      }else{
+        world.stage+=1;
+        return "The wall seemed to give a bit as you threw yourself against it. Try again.";
       }
-      world.stage+=1;
-      return "The wall seemed to give a bit as you threw yourself against it. Try again.";
     }
   ),
-  secret2Vault: new Exit("Exit to Lower Vault",\"Boom!\"\nA low, grinding, reverberating crash struck upon your ear as you emerged from the secret vault. "+
+  secret2Vault: new Exit("Exit to Lower Vault","\"Boom!\"\nA low, grinding, reverberating crash struck upon your ear as you emerged from the secret vault. "+
     "You started up and looked about. All was black and still. You groped for your light and swung it about you. Then you knew! The great door had swung to."+
     "You were trapped in the lower vaults."
   )
@@ -155,7 +157,7 @@ var items={
   largeRug: new Item("Large rug","It was a large, ornate rug, big enough to keep you both warm."),
   blazer: new Item("Blazer","It was a bit small for you, but it would keep Julia warm."),
   coat: new Item("Coat","It fit perfectly. No worries about being cold now."),
-  mConn:new Item("Strange album",""Parliament: Mothership Connection." Never heard of it… The man on the album cover had the strangest outfit"+
+  mConn:new Item("Strange album","\"Parliament: Mothership Connection.\" Never heard of it… The man on the album cover had the strangest outfit"+
     "-- some chrome colored getup. He seemed to be sliding out of the door of a flying saucer."),
   bills: new Item("Roll of bills", "Their attempt to turn your good will into a business transaction. Still, it was good money--about $60.")
 }
@@ -179,12 +181,13 @@ var containers = {
     }
   )
 };
-rooms[2].addItem(items.vKey);
+rooms[2].addItem(items.vaultKey);
 containers.preSafe.addItem(items.sunglasses)
 rooms[3].addContainer(containers.preSafe);
 w.addRooms(rooms);
 w.linkRooms(0, 1, exits.steps2Lobby,exits.lobby2Steps);
-w.linkRooms(1, 3, exits.lobby2Pres,exits.presToLobby);
+w.linkRooms(1, 3, exits.lobby2Pres,exits.pres2Lobby);
 w.linkRooms(1, 2, exits.lobby2Clerk,exits.clerk2Lobby);
 w.linkRooms(2, 4, exits.clerk2Vault,exits.vault2Clerk);
+w.linkRooms(4, 5, exits.vault2Secret, exits.secret2Vault);
 w.setCurrentRoom(0);

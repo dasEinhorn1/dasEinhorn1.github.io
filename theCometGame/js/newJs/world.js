@@ -41,7 +41,7 @@ World.prototype.playerEnters = function(exitName){
       throw "Not a room.";
     }
   }else{
-    var exit = findByName(exits,exitName)
+    var exit = findByName(exits,exitName);
     if(exit==null){
       throw "Not a room.";
     }
