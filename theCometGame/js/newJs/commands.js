@@ -4,30 +4,31 @@
     2) containers
     3) exits
 */
+var inputHistory = [],
+    inputIndex=-1,
+    modHist=false,
+    currentIn="";
 var look= function(params, world){
   var room= world.currentRoom;
   printParagraph(room.description,"descriptive");
   printParagraph("Exits:","descriptive locator listHead");
   printOrderedList(room.getExitNames(),"descriptive locator");
-  if(room.npcs.length>0){
-    printParagraph("People","descriptive talkTips listHead");
-    printUnorderedList(room.getNpcDesciptions());
-  }
 }
 
 var search=function(params, world){
   if(params.length<1){
+    printParagraph("You looked around","descriptive items");
     var nada1=false,
         nada2=false;
     var icList=world.currentRoom.search(world);
     if(icList[0].length!=0){
-      printParagraph("Items:","descriptive listHead");
-      printOrderedList(icList[0],"descriptive");
+      printParagraph("You saw the following item(s):","descriptive items listHead");
+      printOrderedList(icList[0],"descriptive items");
     }else{
       nada1=true;
     }if(icList[1].length!=0){
-      printParagraph("Containers:","descriptive listHead");
-      printOrderedList(icList[1],"descriptive");
+      printParagraph("You found the following container(s):","descriptive items listHead");
+      printOrderedList(icList[1],"descriptive items");
     }else{
       nada2=true;
     }
@@ -82,7 +83,12 @@ var go= function(params,world){
     printParagraph("Exits:","descriptive locator listHead");
     printOrderedList(world.currentRoom.getExitNames(),"descriptive locator");
   }else{
-    var enterText=world.playerEnters(params.join(" "));
+    try{
+      var enterText=world.playerEnters(params.join(" "));
+    }catch(e){
+      printParagraph("Not a valid exit.","descriptive error");
+      return go([],world);
+    }
     console.log(enterText);
     if(!world.updated){
       printDivider(world.currentRoom.name.toUpperCase(),"locator");
@@ -136,9 +142,17 @@ var inventory= function(params,world){
 }
 function takeCommand(e){
   e.preventDefault();
-  var form=e.currentTarget;
-  printInput($(form).serializeArray()[0].value.trim())
-  var comm=$(form).serializeArray()[0].value.trim().split(" ");
+  var form=e.currentTarget,
+      data=$(form).serializeArray()[0].value.trim();
+  if(data!="" && data!=inputHistory[0]){
+    inputHistory.unshift(data);
+    inputIndex=-1;
+    if(inputHistory.length>20){
+      inputHistory.pop();
+    }
+  }
+  printInput(data)
+  var comm=data.split(" ");
   callCommand(comm[0],comm.slice(1));
   form.reset();
 }
@@ -160,5 +174,33 @@ function callCommand(comm,params){
     return;
   }else{
     printParagraph("That isn't a command. Type help for help","error descriptive");
+  }
+}
+
+function inputHelper(e){
+  if(e.code=='ArrowUp' && inputHistory.length>0){
+    if(inputIndex==-1 && !(e.currentTarget.value=="" || e.currentTarget.value==inputHistory[0] )){
+      inputHistory.unshift(e.currentTarget.value);
+      inputIndex+=1;
+    }
+    inputIndex+=1;
+    console.log(inputIndex);
+    console.log(inputHistory);
+    if(inputIndex>=inputHistory.length){
+      inputIndex=inputHistory.length-1;
+    }
+    e.target.value=inputHistory[inputIndex];
+  }else if(e.code=='ArrowDown' && inputHistory.length>0){
+    console.log(inputIndex);
+    inputIndex-=1;
+    console.log(inputIndex);
+    console.log(inputHistory);
+    if(inputIndex<0){
+      inputIndex=-1;
+      e.target.value="";
+    }else{
+      console.log(inputIndex);
+      e.target.value=inputHistory[inputIndex];
+    }
   }
 }

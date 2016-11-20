@@ -18,27 +18,30 @@
   <body>
     <div id="nav">
       <div id="title">
-        <a href="index.html">The Comet</a>
+        <a href="#">The Comet</a>
       </div>
       <ul id="links">
-        <a href="map.html"><li>Map</li></a>
-        <a href="docs.html"><li>Documentation</li></a>
-        <a class="active" href="index.html"><li>Home</li></a>
+        <a href="map.html" target="_blank"><li>Map</li></a>
+        <a href="docs.html" target="_blank"><li>Documentation</li></a>
+        <a class="active" href="#"><li>Home</li></a>
       </ul>
     </div>
     <div id="outputArea">
 
       <p>
-        A game adaptation of W.E.B Du Bois' <i>The Comet</i> programmed by Adam Hayward
+        A game adaptation of W.E.B Du Bois' &quot;The Comet&quot; programmed by Adam Hayward
       </p>
     </div>
     <form id="inputArea">
-      <input type="text" name="commmand" autocomplete="off" placeholder="Type 'help' for help">
+      <input id="inputLine" type="text" name="commmand" autocomplete="off" placeholder="Type 'help' for help">
       </input>
       <input type="submit" name="submit"></input>
     </form>
   </body>
   <script>
+    document.getElementById("inputLine").onkeyup=function(e){
+      inputHelper(e);
+    };
     w.update();
   </script>
 </html>

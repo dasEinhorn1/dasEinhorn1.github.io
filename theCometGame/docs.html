@@ -40,9 +40,10 @@
               <ul>
                 <li><span class="talkTip">look- </span>describes the room you are in</li>
                 <li class="unimplemented"><span class="talkTip">speak- </span>opens a dialogue with things to say, or you can say what you want</li>
-                <li class="unimplemented"><span class="talkTip">search- </span>searches a room, container, or body for items. Takes any items automatically</li>
+                <li ><span class="talkTip">search- </span>searches a room, container, or body for items. Takes any items from containers</li>
                 <li><span class="talkTip">go- </span>lists exits for each area, and allows you to choose exits by number</li>
                 <li><span class="talkTip">take- </span>takes a specified item from a room. Like search, but for single items and more general use</li>
+                <li><span class="talkTip">inventory- </span>shows items you have picked up during the game</li>
                 <li><span class="talkTip">help- </span>prints out a help menu for quick reference</li>
               </ul>
             </li>
@@ -75,10 +76,33 @@
             <li>Your options will change over time too, as people's conversations go on.</li>
           </ul>
         </li>
-        <li class="unimplemented">Scavenging
+        <li>Scavenging
           <ul>
-            <li>Use 'search' to search an area, body, or container for items.</li>
-            <li>Use 'take' to take an item sitting in a room. (not for items on bodies or in containers)</li>
+            <li>This game features items and collectibles which you can find and pick up. Sometimes, you need them to get to other areas in the game.<li>
+            <li>Items are either found exposed in rooms or stored in containers and on dead bodies.</li>
+            <li>Search:
+              <ul>
+                <li>To search an area for items and containers/bodies, or to take items from containers and bodies use 'search'</li>
+                <li>Alone, 'search' will find all items and containers in an area</li>
+                <li>'search <i>desk</i>' would search a container called 'desk' in the current area</li>
+                <li>'search <i>1</i>' would search the 1st container in an area as listed by 'search'</li>
+              </ul>
+            </li>
+            <li>Take:
+              <ul>
+                <li>To take items sitting in an area (i.e. not in a container) use "take"</li>
+                <li>You can use the item name: 'take <i>iron bar</i>'</li>
+                <li>Or the number: if 1) iron bar, then use 'take <i>1</i>'</li>
+                <li>Either way works, and it is not case sensitive</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Inventory
+          <ul>
+            <li>To see cool stuff you've collected throughout the game, use 'inventory'</li>
+            <li class='unimplemented'>'inventory <i>item name</i>' shows specific items in your inventory with the given <i>item name</i> rather than the whole thing.</li>
+            <li class='unimplemented'>'inventory <i>item #</i>' shows a specific item by its <i>item number</i> position in your inventory.</li>
           </ul>
         </li>
       </ol>
