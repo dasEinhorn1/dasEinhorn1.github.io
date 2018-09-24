@@ -9,64 +9,56 @@
     <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/ >
     <title>Adam Hayward</title>
     <style media="screen">
+      * {
+        box-sizing: border-box;
+      }
       body, html {
-        height: 100%;
         background-color: #4c4c4c;
+        max-width: 100%;
         color: white;
-        overflow: hidden;
       }
       .is-full-height {
-        height: 100%;
+        min-height: 100vh;
       }
-      .flex-1 {
+      .is-v-center {
         flex: 1;
-      }
-      .has-v-centered {
-        position: relative;
-      }
-      .has-v-centered > * {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        align-self: center;
       }
     </style>
   </head>
   <body>
-    <div class="container is-full-height">
-      <div class="columns is-centered is-full-height">
-        <div class="column is-half has-v-centered">
-          <div class="v-centered">
-            <div class="content">
-              <h1 class="title is-1 has-text-centered has-text-black-ter">Adam Hayward</h1>
-              <p class="has-text-centered">
-                Full-stack developer/undergraduate researcher @ the Georgia Tech DILAC Lab
-              </p>
-            </div>
-            <div class="buttons has-addons is-centered">
-              <a class="button is-primary is-outlined"
-                href="https://github.com/dasEinhorn1">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>github.com/dasEinhorn1</span>
-              </a>
-              <a class="button is-primary is-outlined"
-                href="media/Adam_Hayward_Resume.pdf" download>
-                <span class="icon">
-                  <i class="fas fa-file-pdf"></i>
-                </span>
-                <span>resume.pdf</span>
-              </a>
-              <a class="button is-primary is-outlined"
-                href="mailto:adam.hayward@gatech.edu">
-                <span class="icon">
-                  <i class="fas fa-envelope"></i>
-                </span>
-                <span>adam.hayward@gatech.edu</span></a>
-            </div>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1 is-size-3-mobile has-text-centered has-text-black-ter">Adam Hayward</h1>
+          <p class="subtitle has-text-centered is-size-6-mobile has-text-white">
+            Full-stack developer/undergraduate researcher @ the Georgia Tech DILAC Lab
+          </p>
+          <div class="buttons has-addons is-centered">
+            <a class="button is-primary is-outlined"
+            href="https://github.com/dasEinhorn1">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span class="is-size-7-mobile">github.com/dasEinhorn1</span>
+            </a>
+            <a class="button is-primary is-outlined"
+            href="media/Adam_Hayward_Resume.pdf" download>
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+              <span class="is-size-7-mobile">resume.pdf</span>
+            </a>
+            <a class="button is-primary is-outlined"
+            href="mailto:adam.hayward@gatech.edu">
+              <span class="icon">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="is-size-7-mobile">adam.hayward@gatech.edu</span>
+            </a>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </body>
 </html>
